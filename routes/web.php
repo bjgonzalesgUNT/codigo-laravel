@@ -1,32 +1,41 @@
 <?php
 
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('layouts.app');
-})->name('');
-
-//* AUTH
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::get('/logout', function () {
+    return redirect()->route('dashboard');
 });
 
-//* HOME
-Route::get('/home', HomeController::class)->name('home.index');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
 
-//* SERVICES
-Route::resource("/services", ServiceController::class);
+Route::prefix('/dashboard')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/about', AboutController::class)->name('about');
 
-//* CONTACT
-Route::resource('/contacts', ContactController::class);
+    // Rutas del recurso services sin protección
+    Route::resource('/services', ServiceController::class)->only(['index', 'show']);
 
-//* ABOUT
-Route::resource('/about', AboutController::class)->only(['index']);
+    // Rutas del recurso services con protección
+    Route::middleware(['auth'])->group(function () {
+        Route::resource('/services', ServiceController::class)->only(['edit', 'update', 'destroy', 'create', 'store']);
+    });
+
+    Route::resource('/contacts', ContactController::class)->only(['index']);
+
+    Route::middleware(['auth'])->group(function () {
+        Route::resource('/contacts', ContactController::class)->only(['destroy', 'create', 'store']);
+    });
+});
+
+
+
+
+require __DIR__ . '/auth.php';

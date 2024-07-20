@@ -1,9 +1,7 @@
-@extends("layouts.app")
-
-@section("title")
-    nosotros
-@endsection
-
-@section("content")
-    zz
-@endsection
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Nosotros') }}
+        </h2>
+    </x-slot>
+</x-app-layout>
