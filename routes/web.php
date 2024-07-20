@@ -31,7 +31,7 @@ Route::prefix('/dashboard')->group(function () {
     Route::resource('/contacts', ContactController::class)->only(['index']);
 
     Route::middleware(['auth'])->group(function () {
-        Route::resource('/contacts', ContactController::class)->only(['destroy', 'create', 'store']);
+        Route::resource('/contacts', ContactController::class)->only(['create', 'store']);
     });
 });
 
