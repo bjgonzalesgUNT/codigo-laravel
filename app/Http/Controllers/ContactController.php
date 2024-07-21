@@ -28,9 +28,7 @@ class ContactController extends Controller
     {
 
         Contact::create($request->validated());
-        // Mail::to($request->email)->send(new MessageReceived($request->all()));
-        return new MessageReceived($request->validated());
-
-        // return redirect()->route('contacts.index')->with('success', '');
+        Mail::to($request->email)->send(new MessageReceived($request->all()));
+        return redirect()->route('contacts.index')->with('success', 'Message sent successfully');
     }
 }
