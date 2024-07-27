@@ -24,6 +24,10 @@ class ServiceRequest extends FormRequest
         return [
             "title" => "required",
             "description" => "required",
+            "image" => [
+                $this->route('services.create') ? 'required' : 'nullable',
+                "image", "mimes:jpeg,png,jpg,gif,svg", "max:4096"
+            ],
         ];
     }
 }

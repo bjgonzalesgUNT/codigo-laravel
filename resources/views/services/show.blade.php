@@ -9,7 +9,7 @@
             <form method="POST" class="bg-gray-200 p-5 rounded-md shadow-md flex flex-col gap-4 w-1/2">
                 @csrf
                 @method('PATCH')
-                @include('services.partials.form-fields', ['btnTitle' => 'actualizar', 'showBtn' => false])
+                @include('services.partials.form-fields', ['btnTitle' => 'actualizar', 'disabled' => true])
             </form>
         </div>
     </div>

@@ -5,7 +5,8 @@
         "dev": "vite",
         "build": "vite build",
         "docker:stop": "docker stop $(docker ps -a -q)",
-        "docker:dev": "docker-compose up --remove-orphans -d"
+        "docker:dev": "docker-compose up --remove-orphans -d",
+        "docker:start": "npm run docker:stop && npm run docker:dev"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",

@@ -7,10 +7,10 @@
     <div class="py-12 px-40">
         <div class="w-full flex justify-center">
             <form method="POST" class="bg-gray-200 p-5 rounded-md shadow-md flex flex-col gap-4 w-1/2"
-                action="{{ route('services.update', $service) }}">
+                enctype="multipart/form-data" action="{{ route('services.update', $service) }}">
                 @csrf
                 @method('PATCH')
-                @include('services.partials.form-fields', ['btnTitle' => 'actualizar', 'showBtn' => true])
+                @include('services.partials.form-fields', ['btnTitle' => 'actualizar', 'disabled' => false])
             </form>
         </div>
     </div>

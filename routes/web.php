@@ -20,19 +20,15 @@ Route::prefix('/dashboard')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/about', AboutController::class)->name('about');
 
-    // Rutas del recurso services sin protección
-    Route::resource('/services', ServiceController::class)->only(['index', 'show']);
 
     // Rutas del recurso services con protección
     Route::middleware(['auth'])->group(function () {
-        Route::resource('/services', ServiceController::class)->only(['edit', 'update', 'destroy', 'create', 'store']);
+        Route::resource('/services', ServiceController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
+        Route::resource('/contacts', ContactController::class)->only(['create', 'store']);
     });
 
     Route::resource('/contacts', ContactController::class)->only(['index']);
-
-    Route::middleware(['auth'])->group(function () {
-        Route::resource('/contacts', ContactController::class)->only(['create', 'store']);
-    });
+    Route::resource('/services', ServiceController::class)->only(['index', 'show']);
 });
 
 
