@@ -9,7 +9,11 @@
             <form method="POST" class="bg-gray-200 p-5 rounded-md shadow-md flex flex-col gap-4 w-1/2"
                 action="{{ route('services.store') }}" enctype="multipart/form-data">
                 @csrf
-                @include('services.partials.form-fields', ['btnTitle' => 'guardar', 'showBtn' => true])
+                @include('services.partials.form-fields', [
+                    'btnTitle' => 'guardar',
+                    'showBtn' => true,
+                    'disabled' => false,
+                ])
             </form>
         </div>
     </div>

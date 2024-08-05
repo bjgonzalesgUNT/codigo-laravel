@@ -25,11 +25,12 @@
     @error('image')
         <p class="text-red-500 font-semibold">{{ $message }}</p>
     @enderror
-    <div class="relative" id="previewCtn">
+    <div class="relative hidden" id="previewCtn">
         <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->title }}"
-            class="w-full h-64 object-cover rounded-md shadow-md">
+            class="w-full h-64 object-cover rounded-md shadow-md" id="preview">
         <button type="button" id="removeImg"
-            class="absolute size-10 rounded-full top-4 right-4 bg-white text-black hover:text-white hover:bg-cyan-800 transition-colors disabled:cursor-not-allowed" @disabled($disabled) >
+            class="absolute size-10 rounded-full top-4 right-4 bg-white text-black hover:text-white hover:bg-cyan-800 transition-colors disabled:cursor-not-allowed"
+            @disabled($disabled)>
             X
         </button>
     </div>
