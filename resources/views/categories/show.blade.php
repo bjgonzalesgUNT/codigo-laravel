@@ -10,7 +10,7 @@
                 {{ __('Regresar') }}
             </a>
         </div>
-        <div class="grid grid-cols-4 mt-2">
+        <div class="grid grid-cols-4 mt-2 gap-4">
             @forelse ($services as $service)
                 <div class="">
                     <div class="w-full h-60">
