@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
@@ -29,6 +30,8 @@ Route::prefix('/dashboard')->group(function () {
 
     Route::resource('/contacts', ContactController::class)->only(['index']);
     Route::resource('/services', ServiceController::class)->only(['index', 'show']);
+
+    Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 });
 
 

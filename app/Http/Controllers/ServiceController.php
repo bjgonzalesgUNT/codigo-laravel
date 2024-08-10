@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\ServiceSaved;
 use App\Http\Requests\ServiceRequest;
+use App\Models\Category;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -20,12 +21,14 @@ class ServiceController extends Controller
 
         $services = Service::paginate(10);
 
-        return view("services.index", ['services' => $services]);
+        return view("services.index", compact("services"));
     }
 
     public function create(): View
     {
-        return view('services.create', ['service' => new Service()]);
+        $service = new Service();
+        $categories = Category::all(['id', 'name']);
+        return view('services.create', compact('service', 'categories'));
     }
 
     public function store(ServiceRequest $request)
@@ -34,6 +37,7 @@ class ServiceController extends Controller
 
         $newService->title = $request->title;
         $newService->description = $request->description;
+        $newService->category_id = $request->category_id;
 
         $newService->image = $request->file('image')->store('services', 'public');
 
@@ -52,12 +56,14 @@ class ServiceController extends Controller
 
     public function show(Service $service)
     {
-        return view('services.show', ['service' => $service]);
+        $categories = Category::all(['name', 'id']);
+        return view('services.show', compact('service', 'categories'));
     }
 
     public function edit(Service $service): View
     {
-        return view('services.edit', ['service' => $service]);
+        $categories = Category::all(['name', 'id']);
+        return view('services.edit', compact('service', 'categories'));
     }
 
     public function update(ServiceRequest $request, Service $service)

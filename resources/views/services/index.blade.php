@@ -19,6 +19,7 @@
                     <tr>
                         @include('components.table.TableTh', ['value' => 'titulo'])
                         @include('components.table.TableTh', ['value' => 'descripcion'])
+                        @include('components.table.TableTh', ['value' => 'categoria'])
                         @include('components.table.TableTh', ['value' => 'acciones'])
                     </tr>
                 </thead>
@@ -27,6 +28,14 @@
                         <tr>
                             @include('components.table.TableTd', ['value' => $service->title])
                             @include('components.table.TableTd', ['value' => $service->description])
+                            <td class="text-center border-b border-b-gray-300 text-lg normal-case py-2">
+                                @if ($service->category)
+                                    <a href="{{ route('categories.show', $service->category) }}"
+                                        class="underline hover:text-red-500 transition-colors">
+                                        {{ $service->category->name }}
+                                    </a>
+                                @endif
+                            </td>
                             @component('components.table.TableTdActions')
                                 @include('components.buttons.btn-show', [
                                     'route' => 'services.show',

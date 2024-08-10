@@ -9,7 +9,9 @@
     @enderror
 </div>
 <div class="w-full">
-    <label for="description" class="capitalize mb-2 font-semibold text-lg">descripcion</label>
+    <label for="description" class="capitalize mb-2 font-semibold text-lg">
+        {{ __('descripcion') }}
+    </label>
     <input type="text" name="description" id="description"
         class="w-full rounded-md shadow-md p-1 disabled:bg-gray-300 disabled:cursor-not-allowed"
         value="{{ old('description', $service->description) }}" @disabled($disabled)>
@@ -18,7 +20,25 @@
     @enderror
 </div>
 <div class="w-full">
-    <label for="image" class="capitalize mb-2 font-semibold text-lg">Imagen</label>
+    <label for="description" class="capitalize mb-2 font-semibold text-lg">
+        {{ __('Categoria') }}
+    </label>
+    <select name="category_id" id="category_id"
+        class="w-full rounded-md shadow-md p-1 disabled:bg-gray-300 disabled:cursor-not-allowed"
+        @disabled($disabled)>
+        <option value="">{{ __('Seleccione una categoria') }}</option>
+        @foreach ($categories as $category)
+            <option value="{{ $category->id }}"
+                {{ old('category_id', $service->category_id) == $category->id ? 'selected' : '' }}>
+                {{ $category->name }}
+            </option>
+        @endforeach
+    </select>
+</div>
+<div class="w-full">
+    <label for="image" class="capitalize mb-2 font-semibold text-lg">
+        {{ __('Imagen') }}
+    </label>
     <input type="file" name="image" id="image"
         class="w-full rounded-md shadow-md p-1 disabled:bg-gray-300 disabled:cursor-not-allowed"
         value="{{ old('image', $service->image) }}" @disabled($disabled)>
